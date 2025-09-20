@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import emailjs from "@emailjs/browser";
+import emailjs from '@emailjs/browser';
 import { FaInstagram, FaPhone, FaEnvelope, FaTiktok } from "react-icons/fa6";
 
 const Contact = () => {

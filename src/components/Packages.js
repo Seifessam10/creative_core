@@ -141,11 +141,11 @@ const Packages = () => {
   </span>
 
   {/* USD */}
-  {tier.price !== "Custom" && (
+  {/* {tier.price !== "Custom" && (
     <span style={{ fontSize: '14px', fontWeight: 500, color: 'var(--muted)' }}>
       USD
     </span>
-  )}
+  )} */}
 
   {/* Discount badge */}
   {tier.discount && tier.price !== "Custom" && (
