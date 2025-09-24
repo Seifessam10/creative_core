@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 /**
  * Projects — horizontal auto-scrolling slider with animated glass cards.
@@ -28,14 +28,11 @@ const projects = [
 ];
 
 const Projects = () => {
-  const [isPaused, setIsPaused] = useState(false);
-
   const cardStyle = {
     width: '320px',
     height: '400px',
     background: 'linear-gradient(145deg, rgba(20, 20, 20, 0.9), rgba(40, 40, 40, 0.8))',
     backdropFilter: 'blur(20px)',
-    border: '1px solid rgba(255, 255, 255, 0.1)', // Changed from red to subtle white
     borderRadius: '20px',
     overflow: 'hidden',
     position: 'relative',
@@ -81,10 +78,6 @@ const Projects = () => {
     color: '#cccccc'
   };
 
-  const handleCardClick = () => {
-    setIsPaused(!isPaused);
-  };
-
   return (
     <section id="projects" className="section reveal">
       <div className="container">
@@ -102,27 +95,21 @@ const Projects = () => {
         </h3>
 
         <div className="slider">
-          <div 
-            className="track"
-            style={{
-              animationPlayState: isPaused ? 'paused' : 'running'
-            }}
-          >
+          <div className="track">
             {projects.concat(projects).map((p, i) => (
               <figure 
                 key={i} 
                 style={cardStyle}
-                onClick={handleCardClick}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = 'translateY(-10px) scale(1.02)';
-                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)'; // Changed from red to white
-                  e.currentTarget.style.boxShadow = '0 20px 40px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)'; // Changed glow color
+                  e.currentTarget.style.borderColor = 'rgba(177, 6, 26, 0.6)';
+                  e.currentTarget.style.boxShadow = '0 20px 40px rgba(177, 6, 26, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)';
                   const img = e.currentTarget.querySelector('img');
                   if (img) img.style.transform = 'scale(1.1)';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)'; // Changed from red to white
+                  e.currentTarget.style.borderColor = 'rgba(177, 6, 26, 0.3)';
                   e.currentTarget.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)';
                   const img = e.currentTarget.querySelector('img');
                   if (img) img.style.transform = 'scale(1)';
@@ -134,14 +121,14 @@ const Projects = () => {
                   style={imageStyle}
                 />
                 
-                {/* Animated border glow - removed red color */}
+                {/* Animated border glow */}
                 <div style={{
                   position: 'absolute',
                   top: '-2px',
                   left: '-2px',
                   right: '-2px',
                   bottom: '-2px',
-                  background: 'linear-gradient(45deg, rgba(255, 255, 255, 0.1), transparent, rgba(255, 255, 255, 0.1))', // Changed from red to white
+                  background: 'linear-gradient(45deg, rgba(177, 6, 26, 0.3), transparent, rgba(177, 6, 26, 0.3))',
                   borderRadius: '22px',
                   zIndex: '-1',
                   opacity: '0',

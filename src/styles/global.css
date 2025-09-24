@@ -536,3 +536,18 @@ body {
     color: #fff !important;
   }
 }
+
+/* Mobile project cards adjustment */
+@media (max-width: 768px) {
+  #projects figure {
+    width: 260px !important;
+    height: 320px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  #projects figure {
+    width: 240px !important;
+    height: 300px !important;
+  }
+}
