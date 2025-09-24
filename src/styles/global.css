@@ -521,3 +521,18 @@ body {
   transform: rotate(-45deg) translate(7px, -6px);
 }
 
+/* Mobile button color fix */
+@media (max-width: 768px) {
+  .btn-primary {
+    color: #fff !important;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  
+  .btn-primary:focus,
+  .btn-primary:active,
+  .btn-primary:hover {
+    color: #fff !important;
+  }
+}

@@ -161,14 +161,21 @@ const About = () => {
               Abdelrahman Darwesh
             </span>
             , founder of{" "}
-            <span 
-              className="emph"
+           <span 
+              className="emph" 
               style={{
-                background: 'linear-gradient(135deg, var(--accent), #dc2677)',
-                backgroundClip: 'text',
-                WebkitBackgroundClip: 'text',
-                color: 'transparent',
-                fontWeight: '700'
+                color: 'var(--accent)',
+                position: 'relative',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = '#fff';
+                e.currentTarget.style.textShadow = '0 0 20px rgba(177, 6, 26, 0.8)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = 'var(--accent)';
+                e.currentTarget.style.textShadow = 'none';
               }}
             >
               Creative Core
