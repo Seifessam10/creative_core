@@ -2,6 +2,8 @@ import React, { useRef, useState } from "react";
 import emailjs from '@emailjs/browser';
 import { FaInstagram, FaPhone, FaEnvelope, FaTiktok } from "react-icons/fa6";
 
+// ⛔️ Removed CVIcon + handleDownloadCV
+
 const Contact = () => {
   const formRef = useRef(null);
   const [status, setStatus] = useState({ type: "", msg: "" });
@@ -25,7 +27,6 @@ const Contact = () => {
       setLoading(true);
       setStatus({ type: "", msg: "" });
 
-      // Send email with EmailJS
       await emailjs.sendForm(serviceId, templateId, formRef.current, publicKey);
 
       setStatus({
@@ -48,19 +49,18 @@ const Contact = () => {
   return (
     <section id="contact" className="section reveal">
       <div className="container">
-       <h3 
-  className="title" 
-  style={{
-    background: 'linear-gradient(135deg, var(--fg) 0%, rgba(177, 6, 26, 0.8) 100%)',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-    backgroundClip: 'text', // for some browsers
-    color: 'transparent'
-  }}
->
-  Contact
-</h3>
-
+        <h3 
+          className="title" 
+          style={{
+            background: 'linear-gradient(135deg, var(--fg) 0%, rgba(177, 6, 26, 0.8) 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            color: 'transparent'
+          }}
+        >
+          Contact
+        </h3>
 
         <form ref={formRef} onSubmit={onSubmit} className="contact-form glass">
           {/* Name */}
@@ -78,7 +78,6 @@ const Contact = () => {
           {/* Message */}
           <div className="field">
             <label>Message</label>
-            {/* Use textarea instead of input for longer messages */}
             <input name="message" rows="5" placeholder="Tell us about your project..." />
           </div>
 
@@ -99,8 +98,42 @@ const Contact = () => {
           <a href="mailto:creativecore1@hotmail.com" aria-label="Email"><FaEnvelope /></a>
           <a href="https://www.instagram.com/creativecore.io?igsh=MTJ1ZjRta2J3MmVydg==" target="_blank" rel="noreferrer" aria-label="Instagram"><FaInstagram /></a>
           <a href="https://www.tiktok.com/@creativecore.io?_t=ZS-8zjkheTWqZt&_r=1" target="_blank" rel="noreferrer" aria-label="TikTok"><FaTiktok /></a>
+
+          {/* ✅ CV link matches icon styling; downloads on click */}
+          <a
+            href="/mano_cv.jfif"
+            download="mano_cv.jfif"
+            aria-label="Download CV"
+            className="cv-txt"
+          >
+            CV
+          </a>
         </div>
       </div>
+
+      <style jsx>{`
+        /* ⛔️ Removed .cv-icon-btn styles to avoid conflicts */
+
+        /* Keep CV text sized like the react-icons glyphs without changing anything else */
+        .cv-txt {
+          font-size: 1.20em;   /* similar to icon size */
+          font-weight: 700;
+          line-height: 1;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          text-decoration: none;
+          color: inherit;      /* inherit same color/hover rules as other icons */
+          transition: inherit;  /* inherit any transitions defined on .socials a */
+        }
+
+        /* If your .socials > a has hover color, this will pick it up automatically.
+           If not, this keeps behavior consistent with your icons’ current hover color handling. */
+        .cv-txt:hover {
+          color: var(--accent);
+          transform: translateY(-2px);
+        }
+      `}</style>
     </section>
   );
 };

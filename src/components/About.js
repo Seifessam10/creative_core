@@ -158,7 +158,7 @@ const About = () => {
                 e.currentTarget.style.textShadow = 'none';
               }}
             >
-              Abdelrahman Darwesh
+              Abdelrahman Darweesh
             </span>
             , founder of{" "}
            <span 
