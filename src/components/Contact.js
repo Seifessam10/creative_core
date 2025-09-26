@@ -102,7 +102,7 @@ const Contact = () => {
           {/* ✅ CV link matches icon styling; downloads on click */}
           <a
             href="/mano_cv.jfif"
-            download="mano_cv.jfif"
+            download="CreativeCore_CV.jfif"
             aria-label="Download CV"
             className="cv-txt"
           >
