@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import emailjs from '@emailjs/browser';
-import { FaInstagram, FaPhone, FaEnvelope, FaTiktok } from "react-icons/fa6";
+import { FaInstagram, FaPhone, FaEnvelope, FaTiktok ,FaTelegram} from "react-icons/fa6";
 
 // ⛔️ Removed CVIcon + handleDownloadCV
 
@@ -98,16 +98,23 @@ const Contact = () => {
           <a href="mailto:creativecore1@hotmail.com" aria-label="Email"><FaEnvelope /></a>
           <a href="https://www.instagram.com/creativecore.io?igsh=MTJ1ZjRta2J3MmVydg==" target="_blank" rel="noreferrer" aria-label="Instagram"><FaInstagram /></a>
           <a href="https://www.tiktok.com/@creativecore.io?_t=ZS-8zjkheTWqZt&_r=1" target="_blank" rel="noreferrer" aria-label="TikTok"><FaTiktok /></a>
-
-          {/* ✅ CV link matches icon styling; downloads on click */}
           <a
+  href="https://t.me/creativecore0"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="text-white/70 hover:text-[#0088cc] transition-colors duration-300"
+  aria-label="Telegram Group"
+>
+  <FaTelegram className="w-6 h-6" /></a>
+          {/* ✅ CV link matches icon styling; downloads on click */}
+          {/* <a
             href="/mano_cv.jfif"
             download="CreativeCore_CV.jfif"
             aria-label="Download CV"
             className="cv-txt"
           >
             CV
-          </a>
+          </a> */}
         </div>
       </div>
 

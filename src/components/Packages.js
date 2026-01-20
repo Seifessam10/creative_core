@@ -2,12 +2,14 @@ import React from "react";
 
 /**
  * Packages with glassmorphism cards using existing CSS variables
+ * Updated for EGP currency with refined design
  */
 const tiers = [
   {
     name: "Essentials",
-    price: "$75",
-    discount: "25%",  // 👈 add discount here
+    price: "3,200",
+    currency: "EGP",
+    discount: "25%",
     features: [
       "Logo & Basic Identity",
       "2 Clothing Designs",
@@ -17,8 +19,9 @@ const tiers = [
   },
   {
     name: "Signature",
-    price: "$150",
-    discount: "25%",  // 👈 example
+    price: "4,500",
+    currency: "EGP",
+    discount: "25%",
     features: [
       "Premium Logo",
       "4 Clothing Designs",
@@ -30,32 +33,32 @@ const tiers = [
   {
     name: "Bespoke",
     price: "Custom",
+    currency: "",
     features: [
       "End-to-end brand & product",
       "Website Design",
-      "Socal Media Posts",
+      "Social Media Posts",
       "Brand Guidelines",
     ]
   }
 ];
 
-
 const Packages = () => {
   return (
     <section id="packages" className="section reveal">
       <div className="container">
-       <h3 
-  className="title" 
-  style={{
-    background: 'linear-gradient(135deg, var(--fg) 0%, rgba(177, 6, 26, 0.8) 100%)',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-    backgroundClip: 'text', // for some browsers
-    color: 'transparent'
-  }}
->
-  Packages
-</h3>
+        <h3 
+          className="title" 
+          style={{
+            background: 'linear-gradient(135deg, var(--fg) 0%, rgba(177, 6, 26, 0.8) 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            color: 'transparent'
+          }}
+        >
+          Packages
+        </h3>
         <div className="grid">
           {tiers.map((tier, index) => (
             <div
@@ -125,46 +128,59 @@ const Packages = () => {
                 {tier.name}
               </h3>
               
-             <div
-  className="price"
-  style={{
-    marginBottom: '20px',
-    display: 'flex',
-    alignItems: 'center',
-    gap: '10px',
-    flexWrap: 'wrap'
-  }}
->
-  {/* Main price */}
-  <span style={{ fontSize: '28px', fontWeight: 800, color: 'var(--fg)', letterSpacing: '0.2px' }}>
-    {tier.price}
-  </span>
+              <div
+                className="price"
+                style={{
+                  marginBottom: '20px',
+                  display: 'flex',
+                  alignItems: 'baseline',
+                  gap: '8px',
+                  flexWrap: 'wrap'
+                }}
+              >
+                {/* Main price with EGP */}
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
+                  <span style={{ 
+                    fontSize: '32px', 
+                    fontWeight: 800, 
+                    color: 'var(--fg)', 
+                    letterSpacing: '-0.5px',
+                    lineHeight: '1'
+                  }}>
+                    {tier.price}
+                  </span>
+                  
+                  {/* EGP currency */}
+                  {tier.currency && (
+                    <span style={{ 
+                      fontSize: '16px', 
+                      fontWeight: 600, 
+                      color: 'var(--muted)',
+                      letterSpacing: '0.5px'
+                    }}>
+                      {tier.currency}
+                    </span>
+                  )}
+                </div>
 
-  {/* USD */}
-  {/* {tier.price !== "Custom" && (
-    <span style={{ fontSize: '14px', fontWeight: 500, color: 'var(--muted)' }}>
-      USD
-    </span>
-  )} */}
-
-  {/* Discount badge */}
-  {tier.discount && tier.price !== "Custom" && (
-    <span
-      style={{
-        fontSize: '12px',
-        fontWeight: 700,
-        padding: '4px 10px',
-        borderRadius: '999px',
-        color: '#fff',
-        background: 'linear-gradient(135deg, var(--accent), #dc2677)',
-        boxShadow: '0 6px 18px rgba(177, 6, 26, 0.35)'
-      }}
-    >
-      Save {tier.discount}
-    </span>
-  )}
-</div>
-
+                {/* Discount badge */}
+                {tier.discount && tier.price !== "Custom" && (
+                  <span
+                    style={{
+                      fontSize: '11px',
+                      fontWeight: 700,
+                      padding: '4px 10px',
+                      borderRadius: '999px',
+                      color: '#fff',
+                      background: 'linear-gradient(135deg, var(--accent), #dc2677)',
+                      boxShadow: '0 4px 14px rgba(177, 6, 26, 0.3)',
+                      alignSelf: 'center'
+                    }}
+                  >
+                    Save {tier.discount}
+                  </span>
+                )}
+              </div>
               
               <ul className="features" style={{ marginBottom: '24px' }}>
                 {tier.features.map((feature, featureIndex) => (
