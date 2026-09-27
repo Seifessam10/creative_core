@@ -176,6 +176,12 @@ export const footerContent = {
     { label: "Services", href: "/services" },
     { label: "Start a Project", href: "/start-a-project" },
   ],
-  contact: ["[ email — tbc ]", "[ phone — tbc ]", "[ studio address — tbc ]"],
-  channels: ["[ Instagram — handle tbc ]", "[ LinkedIn — handle tbc ]", "[ X — handle tbc ]"],
+  contact: [
+    { label: "+20 10 4190 1009", href: "tel:+201041901009" },
+    { label: "support@creativecore.pro", href: "mailto:support@creativecore.pro" },
+  ],
+  channels: [
+    { label: "Instagram", href: "https://www.instagram.com/creativecore.cc?stkn=cXd4bmw2ODJ0YWJ5" },
+    { label: "TikTok", href: "https://www.tiktok.com/@creativecore.cc?_r=1&_t=ZS-9A5pIytxMAu" },
+  ],
 };

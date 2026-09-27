@@ -5,6 +5,7 @@ import CoreMark from "@/components/CoreMark";
 import Reveal from "@/components/Reveal";
 import SectionEyebrow from "@/components/SectionEyebrow";
 import InkBoneWipe from "@/components/InkBoneWipe";
+import ProcessTimeline from "@/components/ProcessTimeline";
 import CreateBuildGrowSequence from "@/components/sequence/CreateBuildGrowSequence";
 import { disciplines, home, processSteps } from "@/lib/content";
 import styles from "./page.module.css";
@@ -107,15 +108,7 @@ export default function Home() {
             </div>
             <p className={styles.rowHeadBody}>{home.process.body}</p>
           </div>
-          <div className={styles.processGrid}>
-            {processSteps.map((step) => (
-              <div key={step.idx} className={styles.processStep}>
-                <span className={styles.processIdx}>{step.idx}</span>
-                <span className={styles.processTitle}>{step.title}</span>
-                <span className={styles.processBody}>{step.desc}</span>
-              </div>
-            ))}
-          </div>
+          <ProcessTimeline steps={processSteps} showCore />
         </Reveal>
       </section>
 
@@ -154,7 +147,9 @@ export default function Home() {
             <MagneticButton>
               <Button href="/start-a-project">{home.finalCta.cta}</Button>
             </MagneticButton>
-            <span className={styles.placeholderNote}>[ business email — to be supplied ]</span>
+            <a href="mailto:support@creativecore.pro" className={styles.ctaContact}>
+              support@creativecore.pro
+            </a>
           </div>
         </div>
       </section>

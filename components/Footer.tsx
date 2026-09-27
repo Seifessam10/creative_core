@@ -27,18 +27,18 @@ export default function Footer() {
         </div>
         <div className={styles.col}>
           <span className={styles.colLabel}>Contact</span>
-          {footerContent.contact.map((line) => (
-            <span key={line} className={styles.placeholder}>
-              {line}
-            </span>
+          {footerContent.contact.map((item) => (
+            <a key={item.href} href={item.href}>
+              {item.label}
+            </a>
           ))}
         </div>
         <div className={styles.col}>
           <span className={styles.colLabel}>Channels</span>
-          {footerContent.channels.map((line) => (
-            <span key={line} className={styles.placeholder}>
-              {line}
-            </span>
+          {footerContent.channels.map((item) => (
+            <a key={item.href} href={item.href} target="_blank" rel="noopener noreferrer">
+              {item.label}
+            </a>
           ))}
         </div>
       </div>

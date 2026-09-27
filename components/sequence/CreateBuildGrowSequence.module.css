@@ -153,9 +153,12 @@
   color: var(--vermilion);
 }
 
-/* Reduced-motion / static fallback: same elements, laid out via CSS only
-   (no pin, no scrub, nothing ever hidden) — see the component comment for
-   why this stays a class toggle rather than a different returned tree. */
+/* Reduced-motion / mobile fallback: same elements, laid out via CSS only
+   instead of GSAP's pin+scrub — see the component comment for why this
+   stays a class toggle rather than a different returned tree. Reduced
+   motion additionally forces every panel visible with no transform
+   (.panelReduced); the mobile (non-reduced) case is animated in by the
+   component's own IntersectionObserver reveal instead. */
 .stageStatic {
   height: auto;
   display: flex;
@@ -170,11 +173,30 @@
 }
 .panelStatic {
   position: static;
-  opacity: 1 !important;
-  transform: none !important;
   background: var(--ink-900);
   padding: clamp(56px, 8vw, 110px) clamp(20px, 3.4vw, 48px);
 }
 .panelStatic .panelHeading {
   font-size: clamp(34px, 6vw, 84px);
+}
+.panelReduced {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+@media (max-width: 640px) {
+  .panelStatic {
+    padding: clamp(40px, 10vw, 64px) 20px;
+    gap: 14px;
+  }
+  .panelStatic .panelHeading {
+    font-size: clamp(30px, 13vw, 56px);
+  }
+  .panelStatic .panelBody {
+    font-size: 15px;
+  }
+  .panelStatic .tags {
+    font-size: 9px;
+    gap: 8px 16px;
+  }
 }

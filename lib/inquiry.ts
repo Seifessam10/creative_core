@@ -11,13 +11,6 @@ export const PROJECT_TYPES = [
   { value: "something-else", label: "Something Else", discipline: "none" },
 ] as const;
 
-export const BUDGET_BANDS = [
-  { value: "band-1", label: "[ Band 1 — to be configured ]" },
-  { value: "band-2", label: "[ Band 2 — to be configured ]" },
-  { value: "band-3", label: "[ Band 3 — to be configured ]" },
-  { value: "not-sure", label: "Not sure yet" },
-] as const;
-
 export const TIMELINES = [
   { value: "asap", label: "As soon as possible" },
   { value: "1-2-months", label: "Within 1–2 months" },
@@ -27,7 +20,6 @@ export const TIMELINES = [
 ] as const;
 
 export type ProjectType = (typeof PROJECT_TYPES)[number]["value"];
-export type BudgetBand = (typeof BUDGET_BANDS)[number]["value"];
 export type Timeline = (typeof TIMELINES)[number]["value"];
 export type ContactMethod = "email" | "whatsapp";
 
@@ -40,7 +32,6 @@ export const inquirySchema = z
   .object({
     types: z.array(z.string()).min(1, "Pick at least one project type."),
     description: z.string().trim().min(40, "A little more detail — around 40 characters or more."),
-    budget: z.string().optional(),
     timeline: z.string().optional(),
     name: z.string().trim().min(1, "We need a name to reply to."),
     email: z.string().trim().email("That email doesn't look complete."),
@@ -79,7 +70,6 @@ export function renderInquiryEmail(data: InquiryInput, ref: string): string {
     "",
     `Needs: ${projectTypeLabels(data.types)}`,
     `Description: ${data.description}`,
-    `Budget: ${data.budget ?? "Not given"}`,
     `Timeline: ${data.timeline ?? "Not given"}`,
     "",
     `Name: ${data.name}`,

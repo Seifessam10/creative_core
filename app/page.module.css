@@ -229,38 +229,6 @@
   color: var(--gray-300);
 }
 
-.processGrid {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 16px;
-}
-.processStep {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  border-top: 1px solid var(--ink-700);
-  padding-top: 14px;
-}
-.processIdx {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  color: var(--gray-400);
-}
-.processTitle {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(16px, 1.6vw, 24px);
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
-}
-.processBody {
-  font-size: 13px;
-  line-height: 1.55;
-  color: var(--gray-400);
-}
-
 .whyGrid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -342,12 +310,12 @@
   display: block;
   font-variation-settings: "wdth" 118;
 }
-.placeholderNote {
+.ctaContact {
   font-family: var(--font-mono);
   font-size: 10px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--gray-600);
+  color: var(--gray-300);
 }
 
 @media (max-width: 900px) {
@@ -365,8 +333,5 @@
   }
   .capMarkCell {
     display: none;
-  }
-  .processGrid {
-    grid-template-columns: repeat(2, 1fr);
   }
 }

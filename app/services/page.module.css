@@ -50,6 +50,21 @@
   border: 1px solid var(--ink-700);
   max-width: 760px;
 }
+
+/* The desktop hero backdrop is deliberately off-center (left: 84%) so it
+   sits clear of the left-aligned copy in a wide, two-zone layout. On a
+   single-column phone viewport there's no room for that offset — the star
+   drifts back over the body copy and jump-nav cards — so it's pulled
+   smaller and further into the corner instead of being centered like a
+   desktop hero. */
+@media (max-width: 700px) {
+  .heroCore {
+    left: 92% !important;
+    top: 18% !important;
+    width: min(58vmin, 240px) !important;
+    height: min(58vmin, 240px) !important;
+  }
+}
 .jumpTab {
   flex: 1 1 200px;
   background: var(--ink-900);
@@ -352,33 +367,6 @@
   padding-bottom: 5px;
   white-space: nowrap;
 }
-.processGrid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 16px;
-}
-.processStep {
-  border-top: 1px solid var(--ink-700);
-  padding-top: 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  color: var(--gray-400);
-}
-.processIdx {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.18em;
-}
-.processTitle {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(15px, 1.5vw, 22px);
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
-  color: var(--bone-100);
-}
-
 .finalCta {
   position: relative;
   min-height: 96svh;
@@ -454,8 +442,5 @@
   .srvArrow,
   .engArrow {
     display: none;
-  }
-  .processGrid {
-    grid-template-columns: repeat(2, 1fr);
   }
 }

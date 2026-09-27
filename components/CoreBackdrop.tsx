@@ -11,17 +11,20 @@ export default function CoreBackdrop({
   left = "50%",
   top = "52%",
   vignette = "radial-gradient(74% 62% at 50% 52%, rgba(10,10,10,0) 0%, rgba(10,10,10,0.52) 56%, #0A0A0A 100%)",
+  className,
 }: {
   variant?: "chrome" | "chrome-warm";
   size?: string;
   left?: string;
   top?: string;
   vignette?: string;
+  className?: string;
 }) {
   return (
     <>
       <div
         aria-hidden="true"
+        className={className}
         style={{
           position: "absolute",
           left,

@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import CoreMark from "./CoreMark";
 import {
-  BUDGET_BANDS,
   PROJECT_TYPES,
   TIMELINES,
   primaryDiscipline,
@@ -16,7 +15,7 @@ import styles from "./StartProjectForm.module.css";
 const SECTIONS = [
   { id: "q-type", label: "What you need" },
   { id: "q-desc", label: "The project" },
-  { id: "q-planning", label: "Investment & timing" },
+  { id: "q-planning", label: "Timing" },
   { id: "q-contact", label: "Who you are" },
   { id: "q-review", label: "Review & send" },
 ];
@@ -24,7 +23,6 @@ const SECTIONS = [
 type FormState = {
   types: string[];
   description: string;
-  budget: string;
   timeline: string;
   name: string;
   email: string;
@@ -39,7 +37,6 @@ type FormState = {
 const EMPTY_FORM: FormState = {
   types: [],
   description: "",
-  budget: "",
   timeline: "",
   name: "",
   email: "",
@@ -106,7 +103,7 @@ export default function StartProjectForm() {
     setErrors((e) => ({ ...e, type: "" }));
   }
 
-  function pickSingle(field: "budget" | "timeline", value: string) {
+  function pickSingle(field: "timeline", value: string) {
     setForm((f) => ({ ...f, [field]: f[field] === value ? "" : value }));
   }
 
@@ -152,7 +149,6 @@ export default function StartProjectForm() {
         body: JSON.stringify({
           types: form.types,
           description: form.description,
-          budget: form.budget || undefined,
           timeline: form.timeline || undefined,
           name: form.name,
           email: form.email,
@@ -179,7 +175,6 @@ export default function StartProjectForm() {
   }
 
   const progressPct = ((activeSection + 1) / SECTIONS.length) * 100;
-  const budgetLabel = BUDGET_BANDS.find((b) => b.value === form.budget)?.label;
   const timelineLabel = TIMELINES.find((t) => t.value === form.timeline)?.label;
   const discipline = form.types.length ? primaryDiscipline(form.types) : "";
 
@@ -304,25 +299,6 @@ export default function StartProjectForm() {
               className={styles.section}
               style={{ gap: "clamp(28px,3.4vw,44px)" }}
             >
-              <div className={styles.fieldRow} style={{ gap: 20 }}>
-                <div className={styles.sectionHead}>
-                  <h2 className={styles.sectionTitleSm}>What kind of investment are you considering?</h2>
-                  <span className={styles.optional}>Optional</span>
-                </div>
-                <div className={styles.optionGroup}>
-                  {BUDGET_BANDS.map((b) => (
-                    <button
-                      key={b.value}
-                      type="button"
-                      className={`${styles.optionBtn} ${form.budget === b.value ? styles.selected : ""}`}
-                      onClick={() => pickSingle("budget", b.value)}
-                    >
-                      {b.label}
-                    </button>
-                  ))}
-                </div>
-                <p className={styles.hint}>Bands are placeholders until Creative Core sets them. &ldquo;Not sure yet&rdquo; is a normal answer.</p>
-              </div>
               <div className={styles.fieldRow} style={{ gap: 20 }}>
                 <div className={styles.sectionHead}>
                   <h2 className={styles.sectionTitleSm}>When do you want to move?</h2>
@@ -480,13 +456,6 @@ export default function StartProjectForm() {
                   </a>
                 </div>
                 <div className={styles.reviewRow}>
-                  <span className={styles.reviewLabel}>Investment</span>
-                  <span className={styles.reviewValueMono}>{budgetLabel || "Not given"}</span>
-                  <a href="#q-planning" className={styles.reviewEdit} onClick={(e) => { e.preventDefault(); scrollToSection("q-planning"); }}>
-                    Edit
-                  </a>
-                </div>
-                <div className={styles.reviewRow}>
                   <span className={styles.reviewLabel}>Timeline</span>
                   <span className={styles.reviewValueMono}>{timelineLabel || "Not given"}</span>
                   <a href="#q-planning" className={styles.reviewEdit} onClick={(e) => { e.preventDefault(); scrollToSection("q-planning"); }}>
@@ -514,8 +483,7 @@ export default function StartProjectForm() {
                   }}
                 />
                 <span className={styles.consentText}>
-                  I understand Creative Core will use what I&rsquo;ve shared here to reply to my enquiry. See the{" "}
-                  <Link href="/privacy">privacy notice</Link>.
+                  I understand Creative Core will use what I&rsquo;ve shared here only to reply to my enquiry.
                 </span>
               </label>
               {errors.consent && <span className={styles.errorText}>{errors.consent}</span>}
@@ -525,7 +493,7 @@ export default function StartProjectForm() {
                   {status === "submitting" ? "Sending…" : "Start the conversation ↗"}
                 </button>
                 <p className={styles.submitNote}>
-                  We use what you send here to reply to your enquiry. See our <Link href="/privacy">privacy notice</Link>.
+                  We use what you send here only to reply to your enquiry.
                 </p>
               </div>
             </section>

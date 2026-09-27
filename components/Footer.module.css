@@ -58,10 +58,6 @@
   color: var(--gray-300);
 }
 
-.placeholder {
-  color: var(--gray-400);
-}
-
 .bottom {
   max-width: 1440px;
   margin: clamp(40px, 5vw, 72px) auto 0;

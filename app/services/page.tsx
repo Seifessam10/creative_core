@@ -7,6 +7,7 @@ import CoreMark from "@/components/CoreMark";
 import Reveal from "@/components/Reveal";
 import SectionEyebrow from "@/components/SectionEyebrow";
 import InkBoneWipe from "@/components/InkBoneWipe";
+import ProcessTimeline from "@/components/ProcessTimeline";
 import SceneDivider from "@/components/SceneDivider";
 import { disciplines, processSteps, services } from "@/lib/content";
 import styles from "./page.module.css";
@@ -20,7 +21,14 @@ export default function ServicesPage() {
   return (
     <>
       <section className={styles.hero}>
-        <CoreBackdrop variant="chrome" size="min(96vmin, 820px)" left="84%" top="50%" vignette="radial-gradient(84% 70% at 76% 50%, rgba(10,10,10,0) 0%, rgba(10,10,10,0.68) 52%, #0A0A0A 100%)" />
+        <CoreBackdrop
+          variant="chrome"
+          size="min(96vmin, 820px)"
+          left="84%"
+          top="50%"
+          vignette="radial-gradient(84% 70% at 76% 50%, rgba(10,10,10,0) 0%, rgba(10,10,10,0.68) 52%, #0A0A0A 100%)"
+          className={styles.heroCore}
+        />
         <div className={styles.heroInner}>
           <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: "0.24em", textTransform: "uppercase", color: "var(--gray-400)" }}>
             {services.hero.eyebrow}
@@ -137,14 +145,7 @@ export default function ServicesPage() {
               See how we work ↓
             </Link>
           </div>
-          <div className={styles.processGrid}>
-            {processSteps.map((step) => (
-              <div key={step.idx} className={styles.processStep}>
-                <span className={styles.processIdx}>{step.idx}</span>
-                <span className={styles.processTitle}>{step.title}</span>
-              </div>
-            ))}
-          </div>
+          <ProcessTimeline steps={processSteps} compact />
         </Reveal>
       </section>
 
