@@ -10,9 +10,9 @@ function generateRef(): string {
 
 /**
  * Inquiry submission endpoint (PRD §5/§6): validate -> spam/rate-limit ->
- * email the configured business inbox -> optional WhatsApp notification ->
- * respond. No email/WhatsApp provider credentials ever reach the client;
- * they're read here from environment variables only.
+ * email the configured business inbox via EmailJS -> optional WhatsApp
+ * notification -> respond. No email/WhatsApp provider credentials ever
+ * reach the client; they're read here from environment variables only.
  */
 export async function POST(req: NextRequest) {
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
@@ -49,20 +49,38 @@ export async function POST(req: NextRequest) {
   const ref = generateRef();
   const emailBody = renderInquiryEmail(data, ref);
 
-  const RESEND_API_KEY = process.env.RESEND_API_KEY;
+  const EMAILJS_SERVICE_ID = process.env.EMAILJS_SERVICE_ID;
+  const EMAILJS_TEMPLATE_ID = process.env.EMAILJS_TEMPLATE_ID;
+  const EMAILJS_PUBLIC_KEY = process.env.EMAILJS_PUBLIC_KEY;
+  const EMAILJS_PRIVATE_KEY = process.env.EMAILJS_PRIVATE_KEY;
   const INQUIRY_TO_EMAIL = process.env.INQUIRY_TO_EMAIL;
 
-  if (RESEND_API_KEY && INQUIRY_TO_EMAIL) {
+  if (EMAILJS_SERVICE_ID && EMAILJS_TEMPLATE_ID && EMAILJS_PUBLIC_KEY && INQUIRY_TO_EMAIL) {
     try {
-      const { Resend } = await import("resend");
-      const resend = new Resend(RESEND_API_KEY);
-      await resend.emails.send({
-        from: process.env.INQUIRY_FROM_EMAIL || "Creative Core <onboarding@resend.dev>",
-        to: INQUIRY_TO_EMAIL,
-        replyTo: data.email,
-        subject: `New project inquiry — ${ref}`,
-        text: emailBody,
+      const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          service_id: EMAILJS_SERVICE_ID,
+          template_id: EMAILJS_TEMPLATE_ID,
+          user_id: EMAILJS_PUBLIC_KEY,
+          // EmailJS only skips its browser-Origin check for server-side
+          // calls like this one when the account's private key is passed
+          // here — without it, a request with no Origin header is rejected.
+          accessToken: EMAILJS_PRIVATE_KEY,
+          template_params: {
+            to_email: INQUIRY_TO_EMAIL,
+            reply_to: data.email,
+            from_name: data.name,
+            subject: `New project inquiry — ${ref}`,
+            message: emailBody,
+          },
+        }),
       });
+      if (!res.ok) {
+        const text = await res.text().catch(() => "");
+        throw new Error(`EmailJS responded ${res.status}: ${text}`);
+      }
     } catch (err) {
       console.error("[inquiry] email send failed", err);
       return NextResponse.json(
@@ -73,7 +91,7 @@ export async function POST(req: NextRequest) {
   } else {
     // No email provider configured yet — log so the flow is fully testable
     // locally, and flag the missing config rather than failing the visitor.
-    console.log(`[inquiry] RESEND_API_KEY/INQUIRY_TO_EMAIL not set — logging inquiry ${ref} instead:\n${emailBody}`);
+    console.log(`[inquiry] EmailJS env vars not set — logging inquiry ${ref} instead:\n${emailBody}`);
   }
 
   const WHATSAPP_TOKEN = process.env.WHATSAPP_API_TOKEN;
