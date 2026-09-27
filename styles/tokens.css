@@ -1,0 +1,77 @@
+/* Creative Core design tokens — lifted from "Creative Core - Design System.dc.html" */
+
+:root {
+  /* Color — Ink family */
+  --ink-900: #0a0a0a; /* Core Black — base canvas */
+  --ink-800: #141414; /* raised surface */
+  --ink-700: #1f1f1f; /* rule / divider */
+
+  /* Color — Gray family (on ink) */
+  --gray-600: #6b6b6b; /* disabled — non-text only */
+  --gray-400: #8e8e8e; /* secondary on ink — 5.9:1 */
+  --gray-300: #b5b3ad; /* body on ink — 9.4:1 */
+
+  /* Color — Bone family */
+  --bone-100: #f2f0ea; /* warm off-white — light canvas */
+  --bone-200: #e4e1d8; /* light raised surface */
+  --bone-border: #cfcbbf; /* hairline on bone */
+  --bone-ink: #0a0a0a; /* primary text on bone */
+  --bone-body: #3a3a38; /* body text on bone */
+
+  /* Color — Signal */
+  --vermilion: #ff3b22; /* accent — text on ink only */
+  --vermilion-deep: #d42b15; /* accent text on bone — 4.6:1 */
+  --vermilion-signal-ink: #2b0a04; /* body text on a full vermilion field */
+
+  /* Interactive borders */
+  --border-interactive: #33312d;
+
+  /* Chrome — a material, not a flat brand color */
+  --chrome-gradient: linear-gradient(
+    104deg,
+    #fdfdfd 0%,
+    #8e949a 16%,
+    #ffffff 30%,
+    #5f656b 44%,
+    #f4f2ee 56%,
+    #c9b4ac 68%,
+    #ffffff 78%,
+    #7d8288 90%,
+    #e8eaec 100%
+  );
+
+  /* Typography — the variable font faces themselves are injected by next/font
+     via the --font-anybody / --font-public-sans / --font-azeret-mono
+     variables set on <html> in app/layout.tsx. */
+  --font-display: var(--font-anybody), sans-serif;
+  --font-text: var(--font-public-sans), sans-serif;
+  --font-mono: var(--font-azeret-mono), monospace;
+
+  /* Spacing scale — base 8, Fibonacci-leaning. Never use adjacent steps together. */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 16px;
+  --sp-4: 24px;
+  --sp-5: 40px;
+  --sp-6: 64px;
+  --sp-7: 104px;
+  --sp-8: 168px; /* section rhythm */
+
+  /* Grid */
+  --grid-margin: clamp(20px, 5vw, 80px);
+  --grid-gutter: 24px;
+
+  /* Motion — duration tokens */
+  --dur-tap: 120ms; /* press, ink shift */
+  --dur-fast: 240ms; /* hover, focus */
+  --dur-base: 420ms; /* state change */
+  --dur-reveal: 720ms; /* entrance */
+  --dur-cine: 1200ms; /* section wipe */
+  --stagger: 60ms; /* per item, max 8 */
+
+  /* Motion — easing tokens */
+  --ease-core: cubic-bezier(0.16, 1, 0.3, 1); /* entrances */
+  --ease-axis: cubic-bezier(0.76, 0, 0.24, 1); /* wipes, travel */
+  --ease-drift: cubic-bezier(0.4, 0, 0.2, 1); /* ambient */
+  --lerp-magnet: 0.12; /* cursor-follow, per frame */
+}

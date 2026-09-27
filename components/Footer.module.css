@@ -1,0 +1,87 @@
+.footer {
+  background: var(--ink-900);
+  border-top: 1px solid var(--ink-700);
+  padding: clamp(48px, 6vw, 88px) clamp(20px, 3.4vw, 48px) 28px;
+}
+
+.grid {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.brand {
+  grid-column: span 4;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 118;
+  font-weight: 800;
+  font-size: clamp(22px, 2.4vw, 34px);
+  line-height: 0.86;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.disciplines {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+}
+
+.col {
+  grid-column: span 3;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.colLabel {
+  color: var(--gray-600);
+  margin-bottom: 6px;
+}
+
+.col a {
+  color: var(--gray-300);
+}
+
+.placeholder {
+  color: var(--gray-400);
+}
+
+.bottom {
+  max-width: 1440px;
+  margin: clamp(40px, 5vw, 72px) auto 0;
+  border-top: 1px solid var(--ink-700);
+  padding-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray-600);
+}
+
+@media (max-width: 780px) {
+  .brand,
+  .col {
+    grid-column: span 6;
+  }
+}

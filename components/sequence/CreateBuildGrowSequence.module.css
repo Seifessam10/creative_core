@@ -1,0 +1,180 @@
+.section {
+  position: relative;
+  background: var(--ink-900);
+}
+
+.stage {
+  position: relative;
+  height: 100svh;
+  overflow: hidden;
+}
+
+.core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(60vmin, 480px);
+  height: min(60vmin, 480px);
+  transform: translate3d(-50%, -50%, 0);
+  pointer-events: none;
+}
+.core svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.coreSignal {
+  opacity: 0;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+.grid {
+  background-image: linear-gradient(#1a1a1a 1px, transparent 1px),
+    linear-gradient(90deg, #1a1a1a 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.halftone {
+  background-image: radial-gradient(var(--bone-100) 1px, transparent 1.4px);
+  background-size: 7px 7px;
+}
+.swarm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(10px, 2vw, 28px);
+}
+.swarm svg {
+  width: 5%;
+}
+.swarm svg:nth-child(2) {
+  width: 8%;
+}
+.swarm svg:nth-child(3) {
+  width: 12%;
+}
+.swarm svg:nth-child(4) {
+  width: 17%;
+}
+.swarm svg:nth-child(5) {
+  width: 23%;
+}
+
+.panel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(16px, 2vw, 28px);
+  padding: clamp(80px, 12vh, 140px) clamp(20px, 3.4vw, 48px);
+  opacity: 0;
+}
+.panel.center {
+  align-items: center;
+  text-align: center;
+}
+
+.panelHeading {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(58px, 13vw, 210px);
+  line-height: 0.8;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  color: var(--bone-100);
+}
+.panel.center .panelHeading {
+  font-size: clamp(36px, 6.4vw, 104px);
+  line-height: 0.86;
+}
+
+.panelBody {
+  max-width: 44ch;
+  font-size: clamp(16px, 1.4vw, 21px);
+  line-height: 1.5;
+  color: var(--gray-300);
+}
+.panel.center .panelBody {
+  max-width: 52ch;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+}
+.tags span:nth-child(odd) {
+  color: var(--vermilion);
+}
+
+.hud {
+  position: absolute;
+  left: clamp(20px, 3.4vw, 48px);
+  right: clamp(20px, 3.4vw, 48px);
+  bottom: clamp(20px, 4vh, 40px);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  pointer-events: none;
+}
+.hudLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  white-space: nowrap;
+}
+.hudTrack {
+  flex: 1;
+  height: 1px;
+  background: var(--ink-700);
+}
+.hudBar {
+  height: 1px;
+  width: 0;
+  background: var(--vermilion);
+}
+.hudReadout {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--vermilion);
+}
+
+/* Reduced-motion / static fallback: same elements, laid out via CSS only
+   (no pin, no scrub, nothing ever hidden) — see the component comment for
+   why this stays a class toggle rather than a different returned tree. */
+.stageStatic {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--ink-700);
+  border-top: 1px solid var(--ink-700);
+  border-bottom: 1px solid var(--ink-700);
+}
+.layerHidden {
+  display: none;
+}
+.panelStatic {
+  position: static;
+  opacity: 1 !important;
+  transform: none !important;
+  background: var(--ink-900);
+  padding: clamp(56px, 8vw, 110px) clamp(20px, 3.4vw, 48px);
+}
+.panelStatic .panelHeading {
+  font-size: clamp(34px, 6vw, 84px);
+}
