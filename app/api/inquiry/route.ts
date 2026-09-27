@@ -84,12 +84,7 @@ export async function POST(req: NextRequest) {
     } catch (err) {
       console.error("[inquiry] email send failed", err);
       return NextResponse.json(
-        {
-          ok: false,
-          message: "Your answers are still here. Nothing was lost — try sending again.",
-          // TEMPORARY: surfaced to diagnose the live EmailJS integration; remove once it's confirmed sending.
-          debug: err instanceof Error ? err.message : String(err),
-        },
+        { ok: false, message: "Your answers are still here. Nothing was lost — try sending again." },
         { status: 502 },
       );
     }
