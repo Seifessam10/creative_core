@@ -39,7 +39,6 @@ export const inquirySchema = z
     website: z.string().trim().optional(),
     contactMethod: z.enum(["email", "whatsapp"]),
     phone: z.string().trim().optional(),
-    consent: z.literal(true, { message: "Please confirm you've read the privacy notice." }),
     // Deliberately unconstrained: a filled honeypot must still pass schema
     // validation so the route can fake a normal success response instead of
     // handing a bot a validation error that reveals the trap.

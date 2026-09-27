@@ -30,7 +30,6 @@ type FormState = {
   website: string;
   contactMethod: ContactMethod;
   phone: string;
-  consent: boolean;
   hp: string;
 };
 
@@ -44,7 +43,6 @@ const EMPTY_FORM: FormState = {
   website: "",
   contactMethod: "email",
   phone: "",
-  consent: false,
   hp: "",
 };
 
@@ -64,10 +62,6 @@ function validatePhone(phone: string, method: ContactMethod) {
   if (method !== "whatsapp") return "";
   return phone.trim().length > 0 ? "" : "Include the country code, digits only after the +.";
 }
-function validateConsent(consent: boolean) {
-  return consent ? "" : "Please confirm you've read the privacy notice.";
-}
-
 export default function StartProjectForm() {
   const [form, setForm] = useState<FormState>(EMPTY_FORM);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -124,10 +118,9 @@ export default function StartProjectForm() {
       name: validateName(form.name),
       email: validateEmail(form.email),
       phone: validatePhone(form.phone, form.contactMethod),
-      consent: validateConsent(form.consent),
     };
     setErrors(newErrors);
-    const firstInvalid = (["type", "desc", "name", "email", "phone", "consent"] as const).find(
+    const firstInvalid = (["type", "desc", "name", "email", "phone"] as const).find(
       (k) => newErrors[k],
     );
     if (firstInvalid) {
@@ -156,7 +149,6 @@ export default function StartProjectForm() {
           website: form.website || undefined,
           contactMethod: form.contactMethod,
           phone: form.phone || undefined,
-          consent: form.consent,
           hp: form.hp,
         }),
       });
@@ -472,21 +464,6 @@ export default function StartProjectForm() {
                   </a>
                 </div>
               </div>
-
-              <label className={styles.consentRow}>
-                <input
-                  type="checkbox"
-                  checked={form.consent}
-                  onChange={(e) => {
-                    setForm((f) => ({ ...f, consent: e.target.checked }));
-                    setErrors((er) => ({ ...er, consent: "" }));
-                  }}
-                />
-                <span className={styles.consentText}>
-                  I understand Creative Core will use what I&rsquo;ve shared here only to reply to my enquiry.
-                </span>
-              </label>
-              {errors.consent && <span className={styles.errorText}>{errors.consent}</span>}
 
               <div className={styles.submitRow}>
                 <button type="submit" className={styles.submitBtn} disabled={status === "submitting"}>

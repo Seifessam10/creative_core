@@ -361,25 +361,6 @@
   color: var(--gray-400);
 }
 
-.consentRow {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-}
-.consentRow input {
-  margin-top: 4px;
-  accent-color: var(--vermilion);
-}
-.consentText {
-  font-size: 14px;
-  line-height: 1.55;
-  color: var(--gray-300);
-}
-.consentText a {
-  color: var(--gray-100, var(--bone-100));
-  border-bottom: 1px solid var(--border-interactive);
-}
-
 .formError {
   display: flex;
   flex-direction: column;

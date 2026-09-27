@@ -40,6 +40,7 @@
 
 .col {
   grid-column: span 3;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -56,6 +57,7 @@
 
 .col a {
   color: var(--gray-300);
+  overflow-wrap: anywhere;
 }
 
 .bottom {
@@ -79,5 +81,12 @@
   .brand,
   .col {
     grid-column: span 6;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand,
+  .col {
+    grid-column: span 12;
   }
 }
