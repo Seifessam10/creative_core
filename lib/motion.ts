@@ -71,20 +71,4 @@ export function useReducedMotion() {
   return reduced;
 }
 
-/** Tracks a max-width breakpoint so components can swap heavy, scroll-jacking desktop effects for lighter mobile ones. */
-export function useIsMobile(breakpoint = 900) {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const query = window.matchMedia(`(max-width: ${breakpoint}px)`);
-    const update = () => setIsMobile(query.matches);
-
-    update();
-    query.addEventListener("change", update);
-    return () => query.removeEventListener("change", update);
-  }, [breakpoint]);
-
-  return isMobile;
-}
-
 export { gsap, ScrollTrigger, useGSAP };
